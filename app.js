@@ -6,6 +6,7 @@ let tempDescript = document.querySelector(".temp-description");
 let locationTimezone = document.querySelector(".location-timezone");
 let tempArea = document.querySelector(".temperature");
 let ForC = document.querySelector(".temperature span");
+let locIcon = document.querySelector(".weather-icon");
 
 if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(pos => {
@@ -32,12 +33,12 @@ function setContent(data) {
     tempDegree.textContent = Math.round((data.main.temp - 273) * (9 / 5) + 32);
     tempDescript.textContent = toTitleCase(data.weather[0].description);
     locationTimezone.textContent = data.name;
-    setIcon(tempDescript.textContent);
+    setIcon(data.weather[0].icon);
 
 }
 
-function setIcon(descript) {
-
+function setIcon(icon) {
+    locIcon.innerHTML = `<img src="icons/${icon}.png"/>`;
 }
 
 
